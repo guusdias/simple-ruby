@@ -1,3 +1,12 @@
+def avisando_escolhendo_palavra
+  puts 'Escolhendo palavra secreta...'
+end
+
+def avisa_palavra_escolhida palavra_secreta
+  puts "A palavra secreta tem #{palavra_secreta.size} letras... boa sorte!"
+  palavra_secreta
+end
+
 def avisa_chute_efetuado chute
       puts "vc já chutou #{chute}"
 end
@@ -30,13 +39,6 @@ def da_boas_vindas
   puts "\n\n\n\n\n\n"
   puts "Ancioso para jogar com vc, #{nome}! "
   nome
-end
-
-def escolhe_palavra_secreta
-  puts 'Escolhendo palavra secreta...'
-  palavra_secreta = 'programador'
-  puts "A palavra secreta tem #{palavra_secreta.size} letras... boa sorte!"
-  palavra_secreta
 end
 
 def nao_quer_jogar?
