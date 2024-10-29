@@ -1,3 +1,12 @@
+def salva_rank nome, pontos_totais
+  conteudo = "#{nome}\n#{pontos_totais}"
+  File.write "rank.txt", conteudo
+end
+
+def avisa_pontos_totais pontos_totais
+  puts "Vc possui #{pontos_totais} no total"
+end
+
 def avisando_escolhendo_palavra
   puts 'Escolhendo palavra secreta...'
 end
