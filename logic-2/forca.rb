@@ -12,12 +12,10 @@ end
 
 def escolhe_palavra_secreta_sem_consumir_muita_memoria
   avisando_escolhendo_palavra
-  arquivo = File.new("logic-2/dicionario.txt")
-  quantidade_de_palavras = arquivo.gets.to_i
-  numero_escolhido = rand(quantidade_de_palavras)
-  for linha in 1..(numero_escolhido-1)
-    arquivo.gets
-  end
+  arquivo = File.open("logic-2/dicionario.txt")
+  quantidade_de_palavras = arquivo.readline.to_i
+  numero_escolhido = rand(quantidade_de_palavras).to_i
+  (numero_escolhido-1).times {arquivo.gets}
   palavra_secreta = arquivo.gets.strip.downcase
   arquivo.close
   avisa_palavra_escolhida palavra_secreta
