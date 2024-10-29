@@ -1,4 +1,3 @@
-limite_de_tentantiva = 5
 
 def da_boas_vindas
   puts "bem vindo ao jogo"
@@ -7,6 +6,7 @@ def da_boas_vindas
 
   puts "\n\n\n\n\n\n"
   puts "Ancioso para jogar com vc, #{nome}! "
+  nome
 end
 
 def pede_dificuladade
@@ -29,8 +29,8 @@ def sorteia_numero_secreto(dificuldade)
     max = 200
   end
   puts 'Escolhendo um número secreto '
-  sorteado = rand(max)
-  puts "Escolha um número secreto entre 0 e #{max - 1}..."
+  sorteado = rand(max) + 1
+  puts "Escolha um número secreto entre 1 e #{max}..."
   puts "Escolhido... que tal adivinhar hoje o nosso número secreto?"
   sorteado
 end
@@ -61,7 +61,8 @@ def verifica_se_acertou(chute, numero_secreto)
     false
 end
 
-  da_boas_vindas
+def joga(nome, dificuldade)
+  limite_de_tentantiva = 5
   numero_secreto = sorteia_numero_secreto(pede_dificuladade)
   pontos_ate_agora = 1000
   chutes = []
@@ -69,6 +70,12 @@ end
 for tentativa in 1..limite_de_tentantiva
   chute = pede_um_numero tentativa, limite_de_tentantiva, chutes
   chutes << chute #coloca o elemento dentro do array
+
+if nome == 'Gustavo'
+  puts 'acerto, miseravi'
+  break
+end
+
 pontos_a_perder = (chute.to_i - numero_secreto.to_i).abs/2.0
 
 pontos_ate_agora -= pontos_a_perder
@@ -77,3 +84,20 @@ pontos_ate_agora -= pontos_a_perder
 end
 
 puts "vc ganhou #{pontos_ate_agora} pontos."
+end
+
+def quer_jogar
+  puts "Deseja jogar novamente? (S/N)"
+quer_jogar = gets.strip
+quer_jogar.upcase == 'S'
+end
+
+  nome = da_boas_vindas
+  dificuldade = pede_dificuladade
+
+loop do
+  joga nome, dificuldade
+  if !quer_jogar
+    break
+  end
+end
