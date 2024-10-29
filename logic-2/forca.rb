@@ -22,6 +22,11 @@ def escolhe_palavra_secreta_sem_consumir_muita_memoria
   avisa_palavra_escolhida palavra_secreta
 end
 
+def le_rank
+  conteudo = File.read "rank.txt"
+  conteudo.split "\n"
+end
+
 def palavra_mascarada(chutes, palavra_secreta)
 mascara = ''
   for letra in palavra_secreta.chars
@@ -95,12 +100,17 @@ def jogo_da_forca
   nome = da_boas_vindas
   pontos_totais = 0
 
+  avisa_campeao_atual le_rank
+
   loop do
     pontos_totais += joga nome
     avisa_pontos_totais pontos_totais
+
+    if le_rank[1].to_i < pontos_totais
     salva_rank nome, pontos_totais
-  if nao_quer_jogar?
-    break
-  end
+    end
+    if nao_quer_jogar?
+      break
+    end
 end
 end

@@ -1,3 +1,7 @@
+def avisa_campeao_atual dados
+  puts "nosso campeao atual é o #{dados[0]} com #{dados[1]} pontos"
+end
+
 def salva_rank nome, pontos_totais
   conteudo = "#{nome}\n#{pontos_totais}"
   File.write "rank.txt", conteudo
