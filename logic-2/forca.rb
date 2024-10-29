@@ -1,4 +1,5 @@
 require_relative 'ui'
+require_relative 'rank'
 
 def escolhe_palavra_secreta
   avisando_escolhendo_palavra
@@ -20,11 +21,6 @@ def escolhe_palavra_secreta_sem_consumir_muita_memoria
   palavra_secreta = arquivo.gets.strip.downcase
   arquivo.close
   avisa_palavra_escolhida palavra_secreta
-end
-
-def le_rank
-  conteudo = File.read "rank.txt"
-  conteudo.split "\n"
 end
 
 def palavra_mascarada(chutes, palavra_secreta)
