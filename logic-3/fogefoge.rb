@@ -1,4 +1,5 @@
 require_relative 'ui'
+require_relative 'heroi'
 
 def copia_mapa mapa
   novo_mapa = mapa.join("\n").tr("F", " ").split("\n")
@@ -9,6 +10,7 @@ def le_mapa(numero)
   arquivo = "logic-3/mapa#{numero}.txt"
   texto = File.read arquivo
   mapa = texto.split "\n"
+  mapa
 end
 
 def encontra_jogador(mapa)
@@ -17,24 +19,13 @@ def encontra_jogador(mapa)
       linha_atual = mapa[linha]
             coluna_do_heroi = linha_atual.index caractere_do_heroi
             if coluna_do_heroi
-              return [linha, coluna_do_heroi]
+              jogador = Heroi.new
+              jogador.linha = linha
+              jogador.coluna = coluna_do_heroi
+              return jogador
             end
       end
     nil
-end
-
-def calcula_posicao(heroi, direcao)
-    heroi = heroi.dup
-    movimentos = {
-      "W" => [-1, 0],
-      "S" => [+1, 0],
-      "A" => [0, -1],
-      "D" => [0, +1]
-    }
-    movimento = movimentos[direcao.upcase]
-    heroi[0] += movimento[0]
-    heroi[1] += movimento[1]
-    heroi
 end
 
 def posicao_valida?(mapa, posicao)
@@ -63,7 +54,7 @@ def move_fantasma(mapa, novo_mapa,linha, coluna)
   aleatoria = rand posicoes.size
   posicao = posicoes[aleatoria]
   mapa[linha][coluna] = " "
-  novo_mapa[posicao[0]][posicao[1]] = "F"
+  novo_mapa[posicao.linha][posicao.coluna] = "F"
 end
 
 def soma_vetor(vetor1, vetor2)
@@ -108,11 +99,11 @@ def joga(nome)
     desenha mapa
     direcao = pede_movimento
     heroi = encontra_jogador mapa
-    nova_posicao = calcula_posicao heroi, direcao
-    if !posicao_valida? mapa, nova_posicao
+    nova_posicao = heroi.calcula_posicao direcao
+    if !posicao_valida? mapa, nova_posicao.to_array
       next
     end
-    mapa[heroi[0]][heroi[1]] = " "
+    mapa[heroi.coluna[0]][heroi.linha[1]] = " "
     mapa[nova_posicao[0]][nova_posicao[1]] = "H"
 
     mapa = move_fantasmas mapa
