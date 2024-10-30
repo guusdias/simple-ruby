@@ -20,16 +20,16 @@ def encontra_jogador(mapa)
 end
 
 def calcula_posicao(heroi, direcao)
-    case direcao
-    when "W"
-      heroi[0] -= 1
-    when "S"
-      heroi[0] += 1
-    when "A"
-      heroi[1] -= 1
-    when "D"
-      heroi[1] += 1
-    end
+   heroi = heroi.dup
+    movimentos = {
+      "W" => [-1, 0],
+      "S" => [+1, 0],
+      "A" => [0, -1],
+      "D" => [0, +1]
+    }
+    movimento = movimentos[direcao]
+    heroi[0] += movimento[0]
+    heroi[1] += movimento[1]
     heroi
 end
 
@@ -52,7 +52,7 @@ def joga(nome)
   mapa = le_mapa 1
 
   while true
-    desenha mapa 
+    desenha mapa
     direcao = pede_movimento
     heroi = encontra_jogador mapa
     nova_posicao = calcula_posicao heroi, direcao
