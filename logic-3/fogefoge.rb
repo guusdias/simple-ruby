@@ -4,7 +4,6 @@ def le_mapa(numero)
   arquivo = "logic-3/mapa#{numero}.txt"
   texto = File.read arquivo
   mapa = texto.split "\n"
-  mapa
 end
 
 def encontra_jogador(mapa)
@@ -20,7 +19,7 @@ def encontra_jogador(mapa)
 end
 
 def calcula_posicao(heroi, direcao)
-   heroi = heroi.dup
+    heroi = heroi.dup
     movimentos = {
       "W" => [-1, 0],
       "S" => [+1, 0],
@@ -42,17 +41,22 @@ def posicao_valida?(mapa, posicao)
   if estourou_colunas || estourou_linhas
     return false
   end
-  if mapa[posicao[0]][posicao[1]] == "X"
+
+  valor_atual = mapa[posicao[0]][posicao[1]]
+
+  if valor_atual == "X" || valor_atual == "F"
     return false
   end
+
   true
 end
 
 def move_fantasma(mapa, linha, coluna)
-  mapa[linha][coluna] = " "
-  linha += 0
-  coluna += 1
-  mapa[linha][coluna] = "F"
+  posicao = [linha, coluna, +1]
+  if posicao_valida? mapa, posicao
+    mapa[linha][coluna] = " "
+    mapa[posicao[0]][posicao[1]] = "F"
+  end
 end
 
 def move_fantasmas(mapa)
