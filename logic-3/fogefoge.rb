@@ -92,6 +92,22 @@ def jogador_perdeu? mapa
   perdeu
 end
 
+def executa_remocao(mapa, posicao, quantidade)
+  if mapa[posicao.linha][posicao.coluna] == "X"
+    return
+  end
+  posicao.remove_do mapa
+  remove mapa, posicao, quantidade - 1
+end
+
+def remove(mapa, nova_posicao, quantidade)
+  if quantidade == 0
+    return
+  end
+  posicao = posicao.direita
+  executa_remocao mapa, posicao.direita, quantidade
+end
+
 def joga(nome)
   mapa = le_mapa 2
 
@@ -104,6 +120,9 @@ def joga(nome)
       next
     end
     heroi.remove_do mapa
+    if mapa[nova_posicao.linha][nova_posicao.coluna] == "*"
+      remove mapa, nova_posicao, 4
+    end
     nova_posicao.coloca_no mapa
 
     mapa = move_fantasmas mapa
