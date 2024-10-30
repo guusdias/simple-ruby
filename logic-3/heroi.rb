@@ -35,6 +35,12 @@ class Heroi
     calcula_posicao "D"
   end
   def esquerda
-    calcula_posicao
+    calcula_posicao "A"
+  end
+  def cima
+    calcula_posicao "W"
+  end
+  def baixo
+    calcula_posicao "S"
   end
 end
