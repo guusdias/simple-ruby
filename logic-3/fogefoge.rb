@@ -23,7 +23,7 @@ def calcula_posicao(heroi, direcao)
     case direcao
     when "W"
       heroi[0] -= 1
-    when "S" 
+    when "S"
       heroi[0] += 1
     when "A"
       heroi[1] -= 1
