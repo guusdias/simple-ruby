@@ -106,6 +106,9 @@ def remove(mapa, nova_posicao, quantidade)
   end
   posicao = posicao.direita
   executa_remocao mapa, posicao.direita, quantidade
+  executa_remocao mapa, posicao.esquerda, quantidade
+  executa_remocao mapa, posicao.cima, quantidade
+  executa_remocao mapa, posicao.baixo, quantidade
 end
 
 def joga(nome)

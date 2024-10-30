@@ -30,4 +30,11 @@ class Heroi
   def coloca_no(mapa)
     mapa[linha][coluna] = "H"
   end
+
+  def direita
+    calcula_posicao "D"
+  end
+  def esquerda
+    calcula_posicao
+  end
 end
