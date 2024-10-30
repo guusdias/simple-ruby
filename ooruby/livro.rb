@@ -1,3 +1,4 @@
+require_relative 'estoque'
 class Livro
   attr_reader :titulo, :preco, :ano_lancamento
   def initialize(titulo, preco, ano_lancamento, possui_reimpressao)
@@ -31,21 +32,21 @@ class Livro
   end
 end
 
-def livro_para_newsletter(livro)
-  if livro.ano_lancamento < 1999
-    puts "Newsletter/Liquidacao"
-    puts livro.titulo
-    puts livro.preco
-    puts livro.possui_reimpressao?
-  end
+module Contador
+      def @livros.<<(livro)
+    push(livro)
+    if @maxima_necessario.nil? || @maxima_necessario < size
+      @maxima_necessario = size
+    end
+    self
+      end
+    attr_reader :maximo_necessario
 end
-
-algoritmos = Livro.new("Algoritmos", 100, 1998, true)
-arquitetura = Livro.new("Introdução a arquitetura", 70, 2011, true)
 
 class Estoque
   def initialize
     @livros = []
+    @livro.extend Contador
   end
   def exporta_csv
     @livros.each do |livro|
@@ -60,17 +61,35 @@ class Estoque
   def total
     @livros.size
   end
-  def adiciona(livro)
+  def <<(livro)
     @livros << livro if livro
+    self
+  end
+  def remove(livro)
+    @livro.delete livro
+  end
+  def maximo_necessario
+    @livros.maximo_necessario
   end
 end
+
+def livro_para_newsletter(livro)
+  if livro.ano_lancamento < 1999
+    puts "Newsletter/Liquidacao"
+    puts livro.titulo
+    puts livro.preco
+    puts livro.possui_reimpressao?
+  end
+end
+
+algoritmos = Livro.new("Algoritmos", 100, 1998, true)
+arquitetura = Livro.new("Introdução a arquitetura", 70, 2011, true)
 
 estoque = Estoque.new
 estoque.adiciona algoritmos
 estoque.adiciona arquitetura
 estoque.adiciona Livro.new("The programmatic programmer", 100, 1999, true)
 estoque.adiciona Livro.new("Programming Ruby", 100, 2004, true)
-
 
 estoque.exporta_csv
 
