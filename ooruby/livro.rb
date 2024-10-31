@@ -1,10 +1,12 @@
 class Livro
-  attr_reader :titulo, :preco, :ano_lancamento
-  def initialize(titulo, preco, ano_lancamento, possui_reimpressao)
+  attr_reader :titulo, :preco, :ano_lancamento, :editora, :tipo
+  def initialize(titulo, preco, ano_lancamento, possui_reimpressao, editora, tipo)
     @titulo = titulo
     @preco = preco
+    @editora = editora
     @ano_lancamento = ano_lancamento
     @possui_reimpressao = possui_reimpressao
+    @tipo = tipo
     @preco = calcula_preco(preco)
   end
 
@@ -15,6 +17,8 @@ class Livro
   def possui_reimpressao?
     @possui_reimpressao
   end
+
+  private
 
   def calcula_preco(base)
     if @ano_lancamento < 2006
