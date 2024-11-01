@@ -1,24 +1,21 @@
-  <table class="table table-bordered table-hover">
+<% flash.each do |nome, mensagem| %>
+  <div class="alert alert-success" role="alert">
+  <%= content_tag :div, mensagem, class: nome %>
+  </div>
+<%end%>
+<table class="table table-bordered table-hover">
     <thead>
       <tr>
         <td>Nome</td>
         <td>Descrição</td>
+        <td>Departamento</td>
         <td>Preço</td>
         <td>Quantidade</td>
-        <td colspan="1"></td>
+        <td colspan="2"></td>
       </tr>
     </thead>
     <tbody>
-      <% @products.each do |product|%>
-      <tr>
-        <td><%= product.name%></td>
-        <td><%= product.description%></td>
-        <td><%= product.preco%></td>
-        <td><%= product.quantity%></td>
-        <td><%= button_to "Remover", product, method: :delete, class: "btn btn-danger", data: {confirm: "Tem certeza que deseja remover o produto #{product.name} ?"}%>
-        </td>
-      </tr>
-      <%end%>
+      <%= render @products%>
     </tbody>
   </table>
   <div class="alert alert-success" role="alert">
@@ -29,18 +26,12 @@
       <tr>
         <td>Nome</td>
         <td>Descrição</td>
+        <td>Departamento</td>
         <td>Preço</td>
         <td>Quantidade</td>
       </tr>
     </thead>
     <tbody>
-      <% @products_with_discount.each do |product|%>
-      <tr>
-        <td><%= product.name%></td>
-        <td><%= product.description%></td>
-        <td><%= product.preco%></td>
-        <td><%= product.quantity%></td>
-      </tr>
-      <%end%>
+      <% render @products_with_discount%>
     </tbody>
   </table>
