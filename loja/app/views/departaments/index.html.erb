@@ -1,0 +1,28 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Departaments" %>
+
+<h1>Departaments</h1>
+
+<div id="departaments">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @departaments.each do |departament| %>
+      <tr>
+         <td> <%= render departament %></td>
+          <td>
+            <%= link_to "Show this departament", departament %>
+          </td>
+      </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New departament", new_departament_path %>

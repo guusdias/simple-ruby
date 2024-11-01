@@ -5,10 +5,18 @@ class ProductsController < ApplicationController
     @products_with_discount = Product.order(:preco).limit 1
   end
 
+  def new
+    @produto = Product.new
+  end
+
   def create
-    produto  = params.require(:product).permit(:name, :description, :preco, :quantity)
-    Product.create produto
-    redirect_to root_path
+    valores  = params.require(:product).permit(:name, :description, :preco, :quantity)
+    @produto = Product.new valores
+    if @produto.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def destroy
